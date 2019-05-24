@@ -2,7 +2,9 @@
 <html lang="en">
 
 <!--  ------------------------Header Section ---------------------------- -->   
-<?php include("header.php"); ?> 
+<?php 
+session_start(); 
+include("header.php"); ?> 
 
  <body data-spy="scroll" data-target=".bs-docs-sidebar">
  <!-- Subhead

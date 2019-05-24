@@ -89,9 +89,9 @@ if (isset($_SESSION['status'])) {
                                     </li>
                                 </ul>
 
-<?php
-if ($status === null || $status === "") {
-    ?>
+                                <?php
+                                if ($status === null || $status === "") {
+                                    ?>
                                     <ul class="nav rightnav">
                                         <li class="">
                                             <a href="login.php">
@@ -102,12 +102,12 @@ if ($status === null || $status === "") {
                                                 <i class="icon-plane icon"></i>Register!</a>
                                         </li>
                                     </ul>
-    <?php
-} else if ($status === 'success') {
-    ?>
+                                    <?php
+                                } else if ($status === 'success') {
+                                    ?>
                                     <ul class="nav rightnav">
                                         <li class="">
-                                            <a> <?php echo "Welcome     " . $user->name; ?> </a><br>
+                                            <a> <?php echo "Welcome " . $user->name." ".$user->surname ?> </a><br>
                                         </li>    
                                         <li class="">
                                             <a href="logout.php"> <i class="icon-eject icon"></i>Logout</a>
@@ -115,9 +115,9 @@ if ($status === null || $status === "") {
 
                                     </ul>
 
-    <?php
-}
-?>
+                                <?php
+                                }
+                                ?>
                             </nav>
                         </div>
                         <!-- end menu -->

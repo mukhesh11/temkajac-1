@@ -30,12 +30,20 @@ class Users {
     var $organization;  
     var $role;
     var $address;
+    
+    var $country;
+    var $region;
+    var $district;
+    var $loksabha_consty;
+    var $assembly_consty;
+    var $mandal;
+    var $city;
     var $address1;
     var $address2;
-    var $city;
-    var $region;
     var $postal_code;
-    var $country;
+    var $jacCoordinator;
+    var $sysAdmin;
+    
     var $sendJobOpportunities;
     var $sendMatrimony;
     var $sendBusinessPromotions;
@@ -277,6 +285,54 @@ public function get_all_users() {
         global $link;
         $result_set = $link->query("SELECT * FROM 'users'");
         return $result_set;
+    }
+    
+    function getDistrict() {
+        return $this->district;
+    }
+
+    function getLoksabha_consty() {
+        return $this->loksabha_consty;
+    }
+
+    function getAssembly_consty() {
+        return $this->assembly_consty;
+    }
+
+    function getMandal() {
+        return $this->mandal;
+    }
+
+    function getJacCoordinator() {
+        return $this->jacCoordinator;
+    }
+
+    function getSysAdmin() {
+        return $this->sysAdmin;
+    }
+
+    function setDistrict($district) {
+        $this->district = $district;
+    }
+
+    function setLoksabha_consty($loksabha_consty) {
+        $this->loksabha_consty = $loksabha_consty;
+    }
+
+    function setAssembly_consty($assembly_consty) {
+        $this->assembly_consty = $assembly_consty;
+    }
+
+    function setMandal($mandal) {
+        $this->mandal = $mandal;
+    }
+
+    function setJacCoordinator($jacCoordinator) {
+        $this->jacCoordinator = $jacCoordinator;
+    }
+
+    function setSysAdmin($sysAdmin) {
+        $this->sysAdmin = $sysAdmin;
     }
 
 }

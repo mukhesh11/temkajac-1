@@ -1,9 +1,188 @@
 <!DOCTYPE html>
+<!--  ------------------------Header Section ---------------------------- -->   
+<?php
+include("header.php");
+include_once("controllers/functions.php");
+?> 
+
 <html lang="en">
+    <head>
+        <script src="assets/js/jquery-1.12.0.min.js" type="text/javascript"></script>
 
-    <!--  ------------------------Header Section ---------------------------- -->   
-    <?php include("header.php"); ?> 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#country").change(function () {
+                    var codeVal = $(this).val();
+                    var typeid = 'STATE';
+                    //alert("Country Selected :" + codeVal);
+                    
+                    $.ajax({
+                        url: './utils/location.php',
+                        type: 'post',
+                        data: {type: typeid, code: codeVal},
+                        dataType: 'json',
+                        success: function (response) {
+                            var len = response.length;
+                            //alert("States Size :" + len);
+                            $("#region").empty();
+                            $("#district").empty();
+                            $("#lok_consty").empty();
+                            $("#asbly_consty").empty();
+                            $("#region_div").children().remove();
+                            if(len > 0) {
+                                $("#region_div").append("<select id='region' name='region' class='input-xlarge'><option value='0'>- Select -</option></select>");
+                                for (var i = 0; i < len; i++) {
+                                    var code = response[i]['code'];
+                                    var description = response[i]['description'];
+                                    $("#region").append("<option value='" + code + "'>" + description + "</option>");
+                                }    
+                            } else {
+                                $("#region_div").append("<input id='region' name='region' type='text' placeholder='state / province / region' class='input-xlarge'> </p>");
+                                //id="region_div"
+                            } 
+                         },
+                        error: function (exception) {
+                            //var responseText=JSON.parse(exception.responseText);
+                            //alert("Error(s) in file:\n"+responseText.messages);
+                            alert('Exception:' + exception.responseText);
+                        }
+                    });
+                });
+                $('#region_div').on('change', '#region', function(){
+                    var codeVal = $(this).val();
+                    var typeid = 'DISTRICTS';
+                    var lokTypeid = 'LOK_CONSTY';
+                    //alert("State Selected :" + codeVal);
 
+                    $.ajax({
+                        url: './utils/location.php',
+                        type: 'post',
+                        data: {type: typeid, code: codeVal},
+                        dataType: 'json',
+                        success: function (response) {
+                            var len = response.length;
+                            //alert("Districts :" + len);
+                            $("#district").empty();
+                            
+                            $("#district_div").children().remove();
+                            if(len > 0) {
+                                $("#district_div").append("<select id='district' name='district' class='input-xlarge'><option value='0'>- Select -</option></select>");
+                                for (var i = 0; i < len; i++) {
+                                    var code = response[i]['code'];
+                                    var description = response[i]['description'];
+                                    $("#district").append("<option value='" + code + "'>" + description + "</option>");
+                                }    
+                            } else {
+                                $("#district_div").append("<input id='district' name='district' type='text' placeholder='District' class='input-xlarge'> </p>");
+                                //id="region_div"
+                            } 
+                        },
+                        error: function (exception) {
+                            //var responseText=JSON.parse(exception.responseText);
+                            //alert("Error(s) in file:\n"+responseText.messages);
+                            alert('Exception:' + exception.responseText);
+                        }
+                    });
+                    
+                    $.ajax({
+                        url: './utils/location.php',
+                        type: 'post',
+                        data: {type: lokTypeid, code: codeVal},
+                        dataType: 'json',
+                        success: function (response) {
+                            var len = response.length;
+                            //alert("Loksabha Constinuencies :" + len);
+                            $("#lok_consty").empty();
+                            
+                            $("#lok_div").children().remove();
+                            if(len > 0) {
+                                $("#lok_div").append("<select id='lok_consty' name='lok_consty' class='input-xlarge'><option value='0'>- Select -</option></select>");
+                                for (var i = 0; i < len; i++) {
+                                    var code = response[i]['code'];
+                                    var description = response[i]['description'];
+                                    $("#lok_consty").append("<option value='" + code + "'>" + description + "</option>");
+                                }    
+                            } else {
+                                $("#lok_div").append("<input id='lok_consty' name='lok_consty' type='text' placeholder='Loksabha Constituency' class='input-xlarge'> </p>");
+                            } 
+                          },
+                        error: function (exception) {
+                            //var responseText=JSON.parse(exception.responseText);
+                            //alert("Error(s) in file:\n"+responseText.messages);
+                            alert('Exception:' + exception.responseText);
+                        }
+                    });
+                });
+                $('#district_div').on('change', '#district', function(){
+                    var codeVal = $(this).val();
+                    var asyTypeid = 'ASBLY_CONSTY';
+                    var mandalid='MANDALS';
+                    
+                    //alert("District Selected :" + codeVal);
+
+                    $.ajax({
+                        url: './utils/location.php',
+                        type: 'post',
+                        data: {type: asyTypeid, code: codeVal},
+                        dataType: 'json',
+                        success: function (response) {
+                            var len = response.length;
+                            //alert("Assembly Constinuencies :" + len);
+                            $("#asbly_consty").empty();
+                            
+                            $("#asbly_div").children().remove();
+                            if(len > 0) {
+                                $("#asbly_div").append("<select id='asbly_consty' name='asbly_consty' class='input-xlarge'><option value='0'>- Select -</option></select>");
+                                for (var i = 0; i < len; i++) {
+                                    var code = response[i]['code'];
+                                    var description = response[i]['description'];
+                                    $("#asbly_consty").append("<option value='" + code + "'>" + description + "</option>");
+                                }    
+                            } else {
+                                $("#asbly_div").append("<input id='asbly_consty' name='asbly_consty' type='text' placeholder='Loksabha Constituency' class='input-xlarge'> </p>");
+                            }
+
+                        },
+                        error: function (exception) {
+                            //var responseText=JSON.parse(exception.responseText);
+                            //alert("Error(s) in file:\n"+responseText.messages);
+                            alert('Exception:' + exception.responseText);
+                        }
+                    });
+                    $.ajax({
+                        url: './utils/location.php',
+                        type: 'post',
+                        data: {type: mandalid, code: codeVal},
+                        dataType: 'json',
+                        success: function (response) {
+                            var len = response.length;
+                            //alert("Mandals :" + len);
+                            $("#mandal").empty();
+                            
+                            $("#mandal_div").children().remove();
+                            if(len > 0) {
+                                $("#mandal_div").append("<select id='mandal' name='mandal' class='input-xlarge'><option value='0'>- Select -</option></select>");
+                                for (var i = 0; i < len; i++) {
+                                    var code = response[i]['code'];
+                                    var description = response[i]['description'];
+                                    $("#mandal").append("<option value='" + code + "'>" + description + "</option>");
+                                }    
+                            } else {
+                                $("#mandal_div").append("<input id='mandal' name='mandal' type='text' placeholder='Loksabha Constituency' class='input-xlarge'> </p>");
+                            }
+                        },
+                        error: function (exception) {
+                            //var responseText=JSON.parse(exception.responseText);
+                            //alert("Error(s) in file:\n"+responseText.messages);
+                            alert('Exception:' + exception.responseText);
+                        }
+                    });
+                    
+
+                });
+            });
+        </script>
+    </head>
     <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
         <!-- Subhead  ================================================== -->
@@ -35,7 +214,7 @@
                                 <label class="control-label">Email ID <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
                                     <div class="input-append">
-                                        <input type="email" id="emailID" name="emailID" placeholder="Enter Your Email ID" class="input-xlarge">
+                                        <input type="email" id="emailID" name="emailID" placeholder="Enter Your Email ID" class="input-xlarge" required >
                                         <span class="add-on">@</span>
                                     </div>
                                     <span class="help-block">Use your email ID as login ID in application.</span>
@@ -45,28 +224,28 @@
                             <div class="control-group">
                                 <label class="control-label">Password <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
-                                    <input type="password" id="password" name="password" placeholder="Enter Password.." class="input-xlarge">
+                                    <input type="password" id="password" name="password" placeholder="Enter Password.." class="input-xlarge"  required>
                                     <span class="help-block">Password should be a minimum of 8 characters, with minimum of one number or special character.</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Confirm Password <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
-                                    <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password.." class="input-xlarge"> 
+                                    <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password.." class="input-xlarge"  required> 
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label">Full Name <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
-                                    <input type="text" id="fullName" name="fullName" placeholder="Enter Full Name.." class="input-xlarge"> 
+                                    <input type="text" id="fullName" name="fullName" placeholder="Enter Full Name.." class="input-xlarge"  required> 
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label">Surname <span class="asteriskField">*</span> </label>
                                 <div class="controls">
-                                    <input type="text" id="surname" name="surname" placeholder="Enter Surname" class="input-xlarge"> 
+                                    <input type="text" id="surname" name="surname" placeholder="Enter Surname" class="input-xlarge" required> 
                                 </div>
                             </div>
 
@@ -87,14 +266,14 @@
                                     </select>
                                 </label> 
                                 <div class="controls">
-                                    <input type="text" id="relation"  name="relation" placeholder="Father Name or Husband Name" class="input-xlarge"> 
+                                    <input type="text" id="relation"  name="relation" placeholder="Father Name or Husband Name" class="input-xlarge" required> 
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label">Mother Name</label> 
                                 <div class="controls">
-                                    <input type="text" id="motherName" name="motherName" placeholder="Enter Mother Name" class="input-xlarge">
+                                    <input type="text" id="motherName" name="motherName" placeholder="Enter Mother Name" class="input-xlarge" required>
                                 </div>
                             </div>
 
@@ -109,14 +288,14 @@
                                 <label class="control-label">Upload Photo</label> 
                                 <div class="controls">
                                     <input type="hidden" id="filename" name="filename" value="">
-                                    <input type="file" id="uploadphoto" name="uploadphoto" class="form-control form-control-sm">
+                                    <input type="file" id="uploadphoto" name="uploadphoto" class="form-control form-control-sm" required>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label">Aadhar Number <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
-                                    <input type="number" id="aadharNumber" name="aadharNumber" placeholder="Enter 12 digit Aadhar Number" class="input-xlarge" >
+                                    <input type="number" id="aadharNumber" name="aadharNumber" placeholder="Enter 12 digit Aadhar Number" class="input-xlarge" required >
                                 </div>
                             </div>
 
@@ -124,7 +303,7 @@
                                 <label class="control-label">Mobile Number <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
                                     <div class="input-append">
-                                        <input type="number" id="mobileNumber" name="mobileNumber" placeholder="Enter Mobile Number" class="input-xlarge" >
+                                        <input type="number" id="mobileNumber" name="mobileNumber" placeholder="Enter Mobile Number" class="input-xlarge"  required>
                                         <span class="add-on"><i class="icon-phone"></i></span>
                                     </div>
                                 </div>
@@ -136,7 +315,7 @@
                                     <div class='input-group'>
                                         <div class="input-group-addon">
                                             <div class="input-append">
-                                                <input type="date" id="dateOfBirth" name="dateOfBirth" class="input-xlarge" placeholder="DD/MM/YYY"  />
+                                                <input type="date" id="dateOfBirth" name="dateOfBirth" class="input-xlarge" placeholder="DD/MM/YYY"  required />
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
                                         </div>
@@ -224,303 +403,86 @@
                                         <textarea rows="3" class="input-xlarge" id="organizationAddress" name="organizationAddress" placeholder="Enter role in organization"></textarea>
                                     </div>
                                 </div>
-  
-                                
+
+
                             </fieldset>
 
                             <fieldset>
                                 <legend>Address:</legend>
-                                <!-- trying to add drop down box using jquery
-                                <div class="frmDronpDown">
-	<div class="row">
-		<label>Country:</label><br/>
-		<select name="country" id="country-list" class="demoInputBox" onChange="getState(this.value);">
-		<option value="">Select Country</option>
-		<?php
-		foreach($results as $country) {
-		?>
-		<option value="<?php echo $country["id"]; ?>"><?php echo $country["name"]; ?></option>
-		<?php
-		}
-		?>
-		</select>
-	</div>
-	<div class="row">
-		<label>State:</label><br/>
-		<select name="state" id="state-list" class="demoInputBox">
-		<option value="">Select State</option>
-		</select>
-	</div>
-</div> -->
-                                
+
                                 <!-- country select -->
                                 <div class="control-group">
                                     <label class="control-label">Country <span class="asteriskField">*</span> </label>
                                     <div class="controls">
                                         <select id="country" name="country" class="input-xlarge">
-                                            <option value="" selected="selected">(please select a country)</option>
-                                            <option value="IN">India</option>
-                                            <option value="">------------</option>
-                                            <option value="AF">Afghanistan</option>
-                                            <option value="AL">Albania</option>
-                                            <option value="DZ">Algeria</option>
-                                            <option value="AS">American Samoa</option>
-                                            <option value="AD">Andorra</option>
-                                            <option value="AO">Angola</option>
-                                            <option value="AI">Anguilla</option>
-                                            <option value="AQ">Antarctica</option>
-                                            <option value="AG">Antigua and Barbuda</option>
-                                            <option value="AR">Argentina</option>
-                                            <option value="AM">Armenia</option>
-                                            <option value="AW">Aruba</option>
-                                            <option value="AU">Australia</option>
-                                            <option value="AT">Austria</option>
-                                            <option value="AZ">Azerbaijan</option>
-                                            <option value="BS">Bahamas</option>
-                                            <option value="BH">Bahrain</option>
-                                            <option value="BD">Bangladesh</option>
-                                            <option value="BB">Barbados</option>
-                                            <option value="BY">Belarus</option>
-                                            <option value="BE">Belgium</option>
-                                            <option value="BZ">Belize</option>
-                                            <option value="BJ">Benin</option>
-                                            <option value="BM">Bermuda</option>
-                                            <option value="BT">Bhutan</option>
-                                            <option value="BO">Bolivia</option>
-                                            <option value="BA">Bosnia and Herzegowina</option>
-                                            <option value="BW">Botswana</option>
-                                            <option value="BV">Bouvet Island</option>
-                                            <option value="BR">Brazil</option>
-                                            <option value="IO">British Indian Ocean Territory</option>
-                                            <option value="BN">Brunei Darussalam</option>
-                                            <option value="BG">Bulgaria</option>
-                                            <option value="BF">Burkina Faso</option>
-                                            <option value="BI">Burundi</option>
-                                            <option value="KH">Cambodia</option>
-                                            <option value="CM">Cameroon</option>
-                                            <option value="CA">Canada</option>
-                                            <option value="CV">Cape Verde</option>
-                                            <option value="KY">Cayman Islands</option>
-                                            <option value="CF">Central African Republic</option>
-                                            <option value="TD">Chad</option>
-                                            <option value="CL">Chile</option>
-                                            <option value="CN">China</option>
-                                            <option value="CX">Christmas Island</option>
-                                            <option value="CC">Cocos (Keeling) Islands</option>
-                                            <option value="CO">Colombia</option>
-                                            <option value="KM">Comoros</option>
-                                            <option value="CG">Congo</option>
-                                            <option value="CD">Congo, the Democratic Republic of the</option>
-                                            <option value="CK">Cook Islands</option>
-                                            <option value="CR">Costa Rica</option>
-                                            <option value="CI">Cote d'Ivoire</option>
-                                            <option value="HR">Croatia (Hrvatska)</option>
-                                            <option value="CU">Cuba</option>
-                                            <option value="CY">Cyprus</option>
-                                            <option value="CZ">Czech Republic</option>
-                                            <option value="DK">Denmark</option>
-                                            <option value="DJ">Djibouti</option>
-                                            <option value="DM">Dominica</option>
-                                            <option value="DO">Dominican Republic</option>
-                                            <option value="TP">East Timor</option>
-                                            <option value="EC">Ecuador</option>
-                                            <option value="EG">Egypt</option>
-                                            <option value="SV">El Salvador</option>
-                                            <option value="GQ">Equatorial Guinea</option>
-                                            <option value="ER">Eritrea</option>
-                                            <option value="EE">Estonia</option>
-                                            <option value="ET">Ethiopia</option>
-                                            <option value="FK">Falkland Islands (Malvinas)</option>
-                                            <option value="FO">Faroe Islands</option>
-                                            <option value="FJ">Fiji</option>
-                                            <option value="FI">Finland</option>
-                                            <option value="FR">France</option>
-                                            <option value="FX">France, Metropolitan</option>
-                                            <option value="GF">French Guiana</option>
-                                            <option value="PF">French Polynesia</option>
-                                            <option value="TF">French Southern Territories</option>
-                                            <option value="GA">Gabon</option>
-                                            <option value="GM">Gambia</option>
-                                            <option value="GE">Georgia</option>
-                                            <option value="DE">Germany</option>
-                                            <option value="GH">Ghana</option>
-                                            <option value="GI">Gibraltar</option>
-                                            <option value="GR">Greece</option>
-                                            <option value="GL">Greenland</option>
-                                            <option value="GD">Grenada</option>
-                                            <option value="GP">Guadeloupe</option>
-                                            <option value="GU">Guam</option>
-                                            <option value="GT">Guatemala</option>
-                                            <option value="GN">Guinea</option>
-                                            <option value="GW">Guinea-Bissau</option>
-                                            <option value="GY">Guyana</option>
-                                            <option value="HT">Haiti</option>
-                                            <option value="HM">Heard and Mc Donald Islands</option>
-                                            <option value="VA">Holy See (Vatican City State)</option>
-                                            <option value="HN">Honduras</option>
-                                            <option value="HK">Hong Kong</option>
-                                            <option value="HU">Hungary</option>
-                                            <option value="IS">Iceland</option>
-                                            <option value="ID">Indonesia</option>
-                                            <option value="IR">Iran (Islamic Republic of)</option>
-                                            <option value="IQ">Iraq</option>
-                                            <option value="IE">Ireland</option>
-                                            <option value="IL">Israel</option>
-                                            <option value="IT">Italy</option>
-                                            <option value="JM">Jamaica</option>
-                                            <option value="JP">Japan</option>
-                                            <option value="JO">Jordan</option>
-                                            <option value="KZ">Kazakhstan</option>
-                                            <option value="KE">Kenya</option>
-                                            <option value="KI">Kiribati</option>
-                                            <option value="KP">Korea, Democratic People's Republic of</option>
-                                            <option value="KR">Korea, Republic of</option>
-                                            <option value="KW">Kuwait</option>
-                                            <option value="KG">Kyrgyzstan</option>
-                                            <option value="LA">Lao People's Democratic Republic</option>
-                                            <option value="LV">Latvia</option>
-                                            <option value="LB">Lebanon</option>
-                                            <option value="LS">Lesotho</option>
-                                            <option value="LR">Liberia</option>
-                                            <option value="LY">Libyan Arab Jamahiriya</option>
-                                            <option value="LI">Liechtenstein</option>
-                                            <option value="LT">Lithuania</option>
-                                            <option value="LU">Luxembourg</option>
-                                            <option value="MO">Macau</option>
-                                            <option value="MK">Macedonia, The Former Yugoslav Republic of</option>
-                                            <option value="MG">Madagascar</option>
-                                            <option value="MW">Malawi</option>
-                                            <option value="MY">Malaysia</option>
-                                            <option value="MV">Maldives</option>
-                                            <option value="ML">Mali</option>
-                                            <option value="MT">Malta</option>
-                                            <option value="MH">Marshall Islands</option>
-                                            <option value="MQ">Martinique</option>
-                                            <option value="MR">Mauritania</option>
-                                            <option value="MU">Mauritius</option>
-                                            <option value="YT">Mayotte</option>
-                                            <option value="MX">Mexico</option>
-                                            <option value="FM">Micronesia, Federated States of</option>
-                                            <option value="MD">Moldova, Republic of</option>
-                                            <option value="MC">Monaco</option>
-                                            <option value="MN">Mongolia</option>
-                                            <option value="MS">Montserrat</option>
-                                            <option value="MA">Morocco</option>
-                                            <option value="MZ">Mozambique</option>
-                                            <option value="MM">Myanmar</option>
-                                            <option value="NA">Namibia</option>
-                                            <option value="NR">Nauru</option>
-                                            <option value="NP">Nepal</option>
-                                            <option value="NL">Netherlands</option>
-                                            <option value="AN">Netherlands Antilles</option>
-                                            <option value="NC">New Caledonia</option>
-                                            <option value="NZ">New Zealand</option>
-                                            <option value="NI">Nicaragua</option>
-                                            <option value="NE">Niger</option>
-                                            <option value="NG">Nigeria</option>
-                                            <option value="NU">Niue</option>
-                                            <option value="NF">Norfolk Island</option>
-                                            <option value="MP">Northern Mariana Islands</option>
-                                            <option value="NO">Norway</option>
-                                            <option value="OM">Oman</option>
-                                            <option value="PK">Pakistan</option>
-                                            <option value="PW">Palau</option>
-                                            <option value="PA">Panama</option>
-                                            <option value="PG">Papua New Guinea</option>
-                                            <option value="PY">Paraguay</option>
-                                            <option value="PE">Peru</option>
-                                            <option value="PH">Philippines</option>
-                                            <option value="PN">Pitcairn</option>
-                                            <option value="PL">Poland</option>
-                                            <option value="PT">Portugal</option>
-                                            <option value="PR">Puerto Rico</option>
-                                            <option value="QA">Qatar</option>
-                                            <option value="RE">Reunion</option>
-                                            <option value="RO">Romania</option>
-                                            <option value="RU">Russian Federation</option>
-                                            <option value="RW">Rwanda</option>
-                                            <option value="KN">Saint Kitts and Nevis</option>
-                                            <option value="LC">Saint LUCIA</option>
-                                            <option value="VC">Saint Vincent and the Grenadines</option>
-                                            <option value="WS">Samoa</option>
-                                            <option value="SM">San Marino</option>
-                                            <option value="ST">Sao Tome and Principe</option>
-                                            <option value="SA">Saudi Arabia</option>
-                                            <option value="SN">Senegal</option>
-                                            <option value="SC">Seychelles</option>
-                                            <option value="SL">Sierra Leone</option>
-                                            <option value="SG">Singapore</option>
-                                            <option value="SK">Slovakia (Slovak Republic)</option>
-                                            <option value="SI">Slovenia</option>
-                                            <option value="SB">Solomon Islands</option>
-                                            <option value="SO">Somalia</option>
-                                            <option value="ZA">South Africa</option>
-                                            <option value="GS">South Georgia and the South Sandwich Islands</option>
-                                            <option value="ES">Spain</option>
-                                            <option value="LK">Sri Lanka</option>
-                                            <option value="SH">St. Helena</option>
-                                            <option value="PM">St. Pierre and Miquelon</option>
-                                            <option value="SD">Sudan</option>
-                                            <option value="SR">Suriname</option>
-                                            <option value="SJ">Svalbard and Jan Mayen Islands</option>
-                                            <option value="SZ">Swaziland</option>
-                                            <option value="SE">Sweden</option>
-                                            <option value="CH">Switzerland</option>
-                                            <option value="SY">Syrian Arab Republic</option>
-                                            <option value="TW">Taiwan, Province of China</option>
-                                            <option value="TJ">Tajikistan</option>
-                                            <option value="TZ">Tanzania, United Republic of</option>
-                                            <option value="TH">Thailand</option>
-                                            <option value="TG">Togo</option>
-                                            <option value="TK">Tokelau</option>
-                                            <option value="TO">Tonga</option>
-                                            <option value="TT">Trinidad and Tobago</option>
-                                            <option value="TN">Tunisia</option>
-                                            <option value="TR">Turkey</option>
-                                            <option value="TM">Turkmenistan</option>
-                                            <option value="TC">Turks and Caicos Islands</option>
-                                            <option value="TV">Tuvalu</option>
-                                            <option value="UG">Uganda</option>
-                                            <option value="UA">Ukraine</option>
-                                            <option value="AE">United Arab Emirates</option>
-                                            <option value="GB">United Kingdom</option>
-                                            <option value="US">United States</option>
-                                            <option value="UM">United States Minor Outlying Islands</option>
-                                            <option value="UY">Uruguay</option>
-                                            <option value="UZ">Uzbekistan</option>
-                                            <option value="VU">Vanuatu</option>
-                                            <option value="VE">Venezuela</option>
-                                            <option value="VN">Viet Nam</option>
-                                            <option value="VG">Virgin Islands (British)</option>
-                                            <option value="VI">Virgin Islands (U.S.)</option>
-                                            <option value="WF">Wallis and Futuna Islands</option>
-                                            <option value="EH">Western Sahara</option>
-                                            <option value="YE">Yemen</option>
-                                            <option value="YU">Yugoslavia</option>
-                                            <option value="ZM">Zambia</option>
-                                            <option value="ZW">Zimbabwe</option>
+                                            <option value="" selected="selected">(Please select a Country)</option>
+
+                                            <?php
+                                            // Fetch Department
+                                            $con = db_connect();
+                                            $sql_country = "select CODE, DESCRIPTION from LOCATION where TYPE='COUNTRY'";
+                                            $country_data = mysqli_query($con, $sql_country);
+                                            while ($row = mysqli_fetch_assoc($country_data)) {
+                                                $id = $row['CODE'];
+                                                $name = $row['DESCRIPTION'];
+
+                                                // Option
+                                                echo "<option value='" . $id . "' >" . $name . "</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
-                                    <!-- region input-->
+                                <!-- region input-->
                                 <div class="control-group">
-                                    <label class="control-label">State / Province / Region<span class="asteriskField">*</span> </label>
-                                    <div class="controls">
-                                        <input id="region" name="region" type="text" placeholder="state / province / region"
-                                               class="input-xlarge">
+                                    <label class="control-label">State/Region<span class="asteriskField">*</span> </label>
+                                    <div class="controls" id="region_div" name="region_div" >
+                                        <input id="region" name="region" type="text" placeholder="State/Region" class="input-xlarge">
                                         <p class="help-block"></p>
                                     </div>
                                 </div>
-                                        
-                                    <!-- city input-->
+
+                                <!-- district input-->
                                 <div class="control-group">
-                                    <label class="control-label">City / Town <span class="asteriskField">*</span> </label>
-                                    <div class="controls">
-                                        <input id="city" name="city" type="text" placeholder="city" class="input-xlarge">
+                                    <label class="control-label">District/ Province <span class="asteriskField">*</span> </label>
+                                    <div class="controls" id="district_div" name="district_div">
+                                        <input id="district" name="district" type="text" placeholder="District/ Province" class="input-xlarge">
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <!-- lok sabha constituency input-->
+                                <div class="control-group">
+                                    <label class="control-label">Loksabha Constituency </label>
+                                    <div class="controls" id="lok_div" name="lok_div">
+                                        <input id="lok_consty" name="lok_consty" type="text" placeholder="Loksabha Constituency" class="input-xlarge">
                                         <p class="help-block"></p>
                                     </div>
                                 </div>  
-                                    <!-- Address form -->
+                                <!-- assembly constituency input-->
+                                <div class="control-group">
+                                    <label class="control-label">Assembly Constituency </label>
+                                    <div class="controls" id="asbly_div" name="asbly_div">
+                                        <input id="asbly_consty" name="asbly_consty" type="text" placeholder="Assembly Constituency" class="input-xlarge">
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>  
+                                <!-- Mandal input-->
+                                <div class="control-group">
+                                    <label class="control-label">Mandal </label>
+                                    <div class="controls"  id="mandal_div" name="mandal_div">
+                                        <input id="mandal" name="mandal" type="text" placeholder="Mandal" class="input-xlarge">
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>  
+                                <!-- City/ Village input-->
+                                <div class="control-group">
+                                    <label class="control-label">City/ Village <span class="asteriskField">*</span> </label>
+                                    <div class="controls">
+                                        <input id="city" name="city" type="text" placeholder="City/ Village Name" class="input-xlarge">
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>                                  
+                                <!-- Address form -->
                                 <div class="control-group">
                                     <label class="control-label">Address Line 1 <span class="asteriskField">*</span> </label> 
                                     <div class="controls">
@@ -533,20 +495,20 @@
                                         <input type="text" class="input-xlarge" id="address2" name="address2" placeholder="Enter Your Address" />
                                     </div>
                                 </div>
-                                
-                               
-                                    <!-- postal-code input-->
+
+
+                                <!-- postal-code input-->
                                 <div class="control-group">
-                                    <label class="control-label">Zip / Postal Code</label>
+                                    <label class="control-label">Zip / Postal Code <span class="asteriskField">*</span> </label>
                                     <div class="controls">
-                                        <input id="postal_code" name="postal_code" type="text" placeholder="zip or postal code"
+                                        <input id="postal_code" name="postal_code" type="text" placeholder="Zip or Postal Code"
                                                class="input-xlarge">
                                         <p class="help-block"></p>
                                     </div>
                                 </div>        
                             </fieldset>
                             <fieldset>
-                                    <!-- Address form -->
+                                <!-- Address form -->
                                 <legend>Access Request:</legend>
                                 <div class="control-group">
                                     <label class="control-label">Job Opportunities</label> 
@@ -597,7 +559,7 @@
         <?php include 'footer.php'; ?> 
 
         <!-- JavaScript Library Files -->
-        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery-1.12.0.min.js" type="text/javascript"></script>
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
         <script src="assets/js/jquery.easing.js"></script>
         <script src="assets/js/google-code-prettify/prettify.js"></script>
@@ -619,90 +581,17 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 
         <script>
-            $(document).ready(function () {
-                var date_input = $('input[name="dateOfBirth"]'); //our date input has the name "date"
-                var container = $('.container form').length > 0 ? $('.container form').parent() : "body";
-                var options = {
-                    format: 'dd/mm/yyyy',
-                    container: container,
-                    todayHighlight: true,
-                    autoclose: true
-                };
-                date_input.datepicker(options);
-
-                $('form[id="registerationForm"]').validate({
-                    errorMessagePosition : 'top', // Instead of inline' which is default
-                    rules: {
-                        emailID: {
-                            required: true,
-                            email: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 8
-                        },
-                        cpassword: {
-                            required: true,
-                            equalTo: "#password",
-                            minlength: 8
-                        },
-                        fullName: 'required',
-                        surname: 'required',
-                        gender: 'required',
-                        aadharNumber: {
-                            required:true,
-                           minlength:12,
-                           maxlength:12
-                        },
-                        mobileNumber: {
-                            required:true,
-                            pattern:"[0-9]{10}",
-                            matches:"[0-9]",
-                            minlength:10,
-                            maxlength:10
-                        },
-                        dateOfBirth: 'required',
-                        address1: 'required',
-                        city: 'required',
-                        region: 'required',
-                        country: 'required'
-                    },
-                    messages: {
-                        emailID: 'Enter a valid email',
-                        password: {
-                            minlength: 'Password must be at least 8 characters long'
-                        },
-                        cpassword: {
-                            minlength: 'Password must be at least 8 characters long'
-                        },
-                        fullName: 'This field is required',
-                        surname: 'This field is required',
-                        gender: 'This field is required',
-                        aadharNumber: {
-                            minlength: 'Aadhar number must be 12 digits'
-                        },
-                        mobileNumber: 'This field is required',
-                        dateOfBirth: 'This field is required',
-                        address1: 'This field is required',
-                        city: 'This field is required',
-                        region: 'This field is required',
-                        country: 'This field is required'
-                    },
-                    // Called when the element is invalid:
-                    highlight: function(element) {
-                        $(element).css('background', '#ffdddd');
-                    },
-
-                    // Called when the element is valid:
-                    unhighlight: function(element) {
-                        $(element).css('background', '#ffffff');
-                    },
-                    submitHandler: function (form) {
-                        form.submit();
-                    }
-
-                })；
-            });
+        $(document).ready(function () {
+            var date_input = $('input[name="dateOfBirth"]'); //our date input has the name "date"
+            var container = $('.container form').length > 0 ? $('.container form').parent() : "body";
+            var options = {
+                format: 'dd/mm/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true
+            };
+            date_input.datepicker(options);
+        });
         </script>
     </body>
 </html>

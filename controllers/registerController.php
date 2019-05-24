@@ -32,10 +32,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user->setAddress(test_input($_POST["organizationAddress"]));
     $user->setAddress1(test_input($_POST["address1"]));
     $user->setAddress2(test_input($_POST["address2"]));
-    $user->setCity(test_input($_POST["city"]));
-    $user->setRegion(test_input($_POST["region"]));
+    
+    
     $user->setPostal_code(test_input($_POST["postal_code"]));
     $user->setCountry(test_input($_POST["country"]));
+    $user->setRegion(test_input($_POST["region"]));
+    $user->setDistrict(test_input($_POST["district"]));
+    $user->setLoksabha_consty(test_input($_POST["lok_consty"]));
+    $user->setAssembly_consty(test_input($_POST["asbly_consty"]));
+    $user->setMandal(test_input($_POST["mandal"]));
+    $user->setCity(test_input($_POST["city"]));
 
     if (isset($_POST["jobAccess"])) {
         $user->setSendJobOpportunities("Y");
@@ -169,12 +175,14 @@ function insertUserData($con, Users $user, $file_name) {
                         MOTHER_NAME,MOTHER_MAIDEN,USER_PHOTO, AADHAR_NO,MOB_NO,DOB,
                         MARITAL_STATUS,OCCUPATION,ORGANIZATION,ORG_ROLE,ORG_ADDRESS,
                         RES_ADDRESS1,RES_ADDRESS2,CITY,REGION,COUNTRY,POSTAL_CODE,
+                        DISTRICT, LOKSABHA_CONSTY, ASSEMBLY_CONSTY, MANDAL,
                         SEND_JOB_OPPORTUNITIES,SEND_MATRIMONY,SEND_BUSINESS_PROMOTIONS,
                         SEND_BLOOD_DONATIONS,SEND_MONTHLY_NEWSLETTER,CREATED_DATE,UPDATED_DATE)
             VALUES ('" . $user->email . "','" . $user->password . "','" . $user->name . "','" . $user->surname . "','" . $user->sex . "','" . $user->relation . "','" .
                 $user->mother_name . "','" . $user->mother_maiden . "','" . $file_name . "','" . $user->aadhar_no . "','" . $user->mob_no . "','" . $mysqldob . "','" .
                 $user->marital_status . "','" . $user->occupation . "','" . $user->organization . "','" . $user->role . "','" . $user->address . "','" .
                 $user->address1 . "','" . $user->address2 . "','" . $user->city . "','" . $user->region . "','" . $user->country . "','" . $user->postal_code . "','" .
+                $user->district. "','" . $user->loksabha_consty . "','" . $user->assembly_consty . "','" . $user->mandal . "','" .
                 $user->sendJobOpportunities . "','" . $user->sendMatrimony . "','" . $user->sendBusinessPromotions . "','" .
                 $user->sendBloodDonations . "','" . $user->sendmonthlyNewsletters . "', SYSDATE(),SYSDATE())";
 

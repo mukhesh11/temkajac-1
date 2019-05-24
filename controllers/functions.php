@@ -14,10 +14,10 @@ function db_connect() {
 
     $con = new mysqli($hostname, $username, $password, $dbname);
     if (mysqli_connect_errno()) {
-        printf("connection failed: %s\n", mysqli_connect_error());
+        printf("Connection failed: %s\n", mysqli_connect_error());
         exit();
     } else {
-        echo 'connected to DB';
+       // echo 'Connected to DB';
     }
 
     return $con;
@@ -33,11 +33,23 @@ function real_escape_string($con, $query) {
 }
 
 function test_input($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-         }
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+   function logToFile($filename, $msg) 
+   {  
+   // open file 
+   $fd = fopen($filename, "a"); 
+   // append date/time to message 
+   $str = "[" . date("Y/m/d h:i:s", mktime()) . "] " . $msg;  
+   // write string 
+   fwrite($fd, $str . "\n"); 
+   // close file 
+   fclose($fd); 
+   } 
 /*
   function affected_rows() {
   return mysqli_affected_rows(db_connect());
