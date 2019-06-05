@@ -49,7 +49,7 @@ if (isset($_SESSION['status'])) {
                 <div class="navbar-inner">
                     <div class="container">
                         <!-- logo -->
-                        <a class="brand logo" href="index.html"><img src="assets/img/temkajac-logo.png" alt="" style="height:100px"></a>
+                        <a class="brand logo" href="index.php"><img src="assets/img/temkajac-logo.png" alt="" style="height:100px"></a>
                         <!-- end logo -->
                         <!-- top menu -->
                         <div class="navigation">
@@ -66,7 +66,7 @@ if (isset($_SESSION['status'])) {
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="members.html">Members</a>
+                                        <a href="index.php">Members</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="founder-members.php">Founder Members</a></li>
                                             <li><a href="jac-coordinators.php">JAC Coordinators</a></li>
@@ -82,7 +82,7 @@ if (isset($_SESSION['status'])) {
                                         <a href="index.php">Matrimony</a>
                                     </li>
                                     <li>
-                                        <a href="portfolio-4cols.html">Gallery</a>
+                                        <a href="index.php">Gallery</a>
                                     </li>
                                     <li>
                                         <a href="contact.php">Contact</a>

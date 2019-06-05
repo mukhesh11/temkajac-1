@@ -32,9 +32,9 @@ include("header.php");
                                             <div class="info animate-in">
                                                 <h2>Our Identity</h2>
                                                 <br>
-                                                <h3>Creating a unique identity</h3>
+                                                <h3>"Patel" our identity</h3>
                                                 <p>
-                                                    Lorem ipsum dolor sit amet, munere commodo ut nam, quod volutpat in per. At nec case iriure, consul recteque nec et.
+                                                    Our aim is to create a unique identity for our munnurukapu community. All members need to add Patel to their names to identify as Munnurukapu Patels.
                                                 </p>
                                                 <a class="btn btn-success" href="#">Learn more &raquo;</a>
                                             </div>
@@ -47,7 +47,7 @@ include("header.php");
                                                 <br>
                                                 <h3>Growing Together</h3>
                                                 <p>
-                                                    Lorem ipsum dolor sit amet, munere commodo ut nam, quod volutpat in per. At nec case iriure, consul recteque nec et.
+                                                    For each one of us to grow, we need to come together and create an ecosystem of growth and togetherness.
                                                 </p>
                                                 <a class="btn btn-success" href="#">Learn more &raquo;</a>
                                             </div>
@@ -60,11 +60,11 @@ include("header.php");
                                                 <br>
                                                 <h3>Create Communication Channels</h3>
                                                 <p>
-                                                    Lorem ipsum dolor sit amet, munere commodo ut nam, quod volutpat in per. At nec case iriure, consul recteque nec et.
+                                                    Multiple Platforms as used, from Social Media, Whatsapp, Web application to build a world wide communication channel. 
                                                 </p>
                                                 <a class="btn btn-success" href="#">Learn more &raquo;</a>
                                             </div>
-                                            <img class="slider_img" src="assets/img/slides/sequence/coordination.png" alt="">
+                                            <img class="slider_img" src="assets/img/slides/sequence/coordination1.jpg" alt="">
                                         </li>
                                         <!-- Layer 4 -->
                                         <li>
@@ -73,7 +73,7 @@ include("header.php");
                                                 <br>
                                                 <h3>Selfless Service</h3>
                                                 <p>
-                                                    Lorem ipsum dolor sit amet, munere commodo ut nam, quod volutpat in per. At nec case iriure, consul recteque nec et.
+                                                    Selfless service to community builds and empowers all members of our community members.
                                                 </p>
                                                 <a class="btn btn-success" href="#">Learn more &raquo;</a>
                                             </div>
@@ -124,44 +124,44 @@ include("header.php");
                       <h3>Services</h3>
                     </div> -->
                     <div class="span3 features">
-                        <i class="icon-circled icon-32 icon-suitcase left active"></i>
+                        <i class="icon-circled icon-32 icon-user left active"></i>
                         <h4>Member Area</h4>
                         <div class="dotted_line">
                         </div>
                         <p class="left">
-                            Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                            Register NOW to avail all membership benefits of TEMKA JAC!!!
                         </p>
-                        <a href="#">Learn more</a>
+                        <!-- <a href="#">Learn more</a> -->
                     </div>
                     <div class="span3 features">
-                        <i class="icon-circled icon-32 icon-plane left"></i>
+                        <i class="icon-circled icon-32 icon-comments left"></i>
                         <h4>Events</h4>
                         <div class="dotted_line">
                         </div>
                         <p class="left">
-                            Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                            Get latest updates of all upcoming events of our community.
                         </p>
-                        <a href="#">Learn more</a>
+                        <!-- <a href="#">Learn more</a> -->
                     </div>
                     <div class="span3 features">
-                        <i class="icon-circled icon-32 icon-leaf left"></i>
+                        <i class="icon-circled icon-32 icon-heart left"></i>
                         <h4>Matrimony</h4>
                         <div class="dotted_line">
                         </div>
                         <p class="left">
-                            Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                            We help find the most suitable life partner from our community. 
                         </p>
-                        <a href="#">Learn more</a>
+                       <!-- <a href="#">Learn more</a> -->
                     </div>
                     <div class="span3 features">
-                        <i class="icon-circled icon-32 icon-wrench left"></i>
+                        <i class="icon-circled icon-32 icon-bullhorn left"></i>
                         <h4>Promote Your Business</h4>
                         <div class="dotted_line">
                         </div>
                         <p class="left">
-                            Dolorem adipiscing definiebas ut nec. Dolore consectetuer eu vim, elit molestie ei has, petentium imperdiet in pri mel virtute nam.
+                            Get access and interact with lakhs of trusted community members to Promote & Grow your business.
                         </p>
-                        <a href="#">Learn more</a>
+                        <!-- <a href="#">Learn more</a> -->
                     </div>
                 </div>
                 <div class="row">
@@ -172,13 +172,13 @@ include("header.php");
                                     <div class="tagline_text">
                                         <h2>Don't miss the opportunity!!! Register soon to avail benefits.</h2>
                                         <p>
-                                            Lorem ipsum dolor sit amet, vix ceteros noluisse intellegat ne, ex nec insolens liberavisse, no adhuc causae nominati duo.
+                                            Registration is a mandatory first step towards accessing the vast opportunites provided by TEMKA JAC.
                                         </p>
                                     </div>
                                     <div class="btn-toolbar cta">
-                                        <a class="btn btn-large btn-color" href="#">
+                                        <a class="btn btn-large btn-color" href="register.php">
                                             <i class="icon-plane icon-white"></i> Register Now </a>
-                                        <a class="btn btn-large btn-inverse" href="#">
+                                        <a class="btn btn-large btn-inverse" href="login.php">
                                             <i class="icon-briefcase icon-white"></i> Login Now!!! </a>
                                     </div>
                                 </div>

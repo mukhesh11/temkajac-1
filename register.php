@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <!--  ------------------------Header Section ---------------------------- -->   
 <?php
+session_start();
 include("header.php");
 include_once("controllers/functions.php");
+
 ?> 
 
 <html lang="en">
     <head>
         <script src="assets/js/jquery-1.12.0.min.js" type="text/javascript"></script>
-
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#country").change(function () {
                     var codeVal = $(this).val();
                     var typeid = 'STATE';
                     //alert("Country Selected :" + codeVal);
-                    
+
                     $.ajax({
                         url: './utils/location.php',
                         type: 'post',
@@ -29,18 +31,18 @@ include_once("controllers/functions.php");
                             $("#lok_consty").empty();
                             $("#asbly_consty").empty();
                             $("#region_div").children().remove();
-                            if(len > 0) {
+                            if (len > 0) {
                                 $("#region_div").append("<select id='region' name='region' class='input-xlarge'><option value='0'>- Select -</option></select>");
                                 for (var i = 0; i < len; i++) {
                                     var code = response[i]['code'];
                                     var description = response[i]['description'];
                                     $("#region").append("<option value='" + code + "'>" + description + "</option>");
-                                }    
+                                }
                             } else {
                                 $("#region_div").append("<input id='region' name='region' type='text' placeholder='state / province / region' class='input-xlarge'> </p>");
                                 //id="region_div"
-                            } 
-                         },
+                            }
+                        },
                         error: function (exception) {
                             //var responseText=JSON.parse(exception.responseText);
                             //alert("Error(s) in file:\n"+responseText.messages);
@@ -48,7 +50,7 @@ include_once("controllers/functions.php");
                         }
                     });
                 });
-                $('#region_div').on('change', '#region', function(){
+                $('#region_div').on('change', '#region', function () {
                     var codeVal = $(this).val();
                     var typeid = 'DISTRICTS';
                     var lokTypeid = 'LOK_CONSTY';
@@ -63,19 +65,19 @@ include_once("controllers/functions.php");
                             var len = response.length;
                             //alert("Districts :" + len);
                             $("#district").empty();
-                            
+
                             $("#district_div").children().remove();
-                            if(len > 0) {
+                            if (len > 0) {
                                 $("#district_div").append("<select id='district' name='district' class='input-xlarge'><option value='0'>- Select -</option></select>");
                                 for (var i = 0; i < len; i++) {
                                     var code = response[i]['code'];
                                     var description = response[i]['description'];
                                     $("#district").append("<option value='" + code + "'>" + description + "</option>");
-                                }    
+                                }
                             } else {
                                 $("#district_div").append("<input id='district' name='district' type='text' placeholder='District' class='input-xlarge'> </p>");
                                 //id="region_div"
-                            } 
+                            }
                         },
                         error: function (exception) {
                             //var responseText=JSON.parse(exception.responseText);
@@ -83,7 +85,7 @@ include_once("controllers/functions.php");
                             alert('Exception:' + exception.responseText);
                         }
                     });
-                    
+
                     $.ajax({
                         url: './utils/location.php',
                         type: 'post',
@@ -93,19 +95,19 @@ include_once("controllers/functions.php");
                             var len = response.length;
                             //alert("Loksabha Constinuencies :" + len);
                             $("#lok_consty").empty();
-                            
+
                             $("#lok_div").children().remove();
-                            if(len > 0) {
+                            if (len > 0) {
                                 $("#lok_div").append("<select id='lok_consty' name='lok_consty' class='input-xlarge'><option value='0'>- Select -</option></select>");
                                 for (var i = 0; i < len; i++) {
                                     var code = response[i]['code'];
                                     var description = response[i]['description'];
                                     $("#lok_consty").append("<option value='" + code + "'>" + description + "</option>");
-                                }    
+                                }
                             } else {
                                 $("#lok_div").append("<input id='lok_consty' name='lok_consty' type='text' placeholder='Loksabha Constituency' class='input-xlarge'> </p>");
-                            } 
-                          },
+                            }
+                        },
                         error: function (exception) {
                             //var responseText=JSON.parse(exception.responseText);
                             //alert("Error(s) in file:\n"+responseText.messages);
@@ -113,11 +115,11 @@ include_once("controllers/functions.php");
                         }
                     });
                 });
-                $('#district_div').on('change', '#district', function(){
+                $('#district_div').on('change', '#district', function () {
                     var codeVal = $(this).val();
                     var asyTypeid = 'ASBLY_CONSTY';
-                    var mandalid='MANDALS';
-                    
+                    var mandalid = 'MANDALS';
+
                     //alert("District Selected :" + codeVal);
 
                     $.ajax({
@@ -129,15 +131,15 @@ include_once("controllers/functions.php");
                             var len = response.length;
                             //alert("Assembly Constinuencies :" + len);
                             $("#asbly_consty").empty();
-                            
+
                             $("#asbly_div").children().remove();
-                            if(len > 0) {
+                            if (len > 0) {
                                 $("#asbly_div").append("<select id='asbly_consty' name='asbly_consty' class='input-xlarge'><option value='0'>- Select -</option></select>");
                                 for (var i = 0; i < len; i++) {
                                     var code = response[i]['code'];
                                     var description = response[i]['description'];
                                     $("#asbly_consty").append("<option value='" + code + "'>" + description + "</option>");
-                                }    
+                                }
                             } else {
                                 $("#asbly_div").append("<input id='asbly_consty' name='asbly_consty' type='text' placeholder='Loksabha Constituency' class='input-xlarge'> </p>");
                             }
@@ -158,15 +160,15 @@ include_once("controllers/functions.php");
                             var len = response.length;
                             //alert("Mandals :" + len);
                             $("#mandal").empty();
-                            
+
                             $("#mandal_div").children().remove();
-                            if(len > 0) {
+                            if (len > 0) {
                                 $("#mandal_div").append("<select id='mandal' name='mandal' class='input-xlarge'><option value='0'>- Select -</option></select>");
                                 for (var i = 0; i < len; i++) {
                                     var code = response[i]['code'];
                                     var description = response[i]['description'];
                                     $("#mandal").append("<option value='" + code + "'>" + description + "</option>");
-                                }    
+                                }
                             } else {
                                 $("#mandal_div").append("<input id='mandal' name='mandal' type='text' placeholder='Loksabha Constituency' class='input-xlarge'> </p>");
                             }
@@ -177,9 +179,89 @@ include_once("controllers/functions.php");
                             alert('Exception:' + exception.responseText);
                         }
                     });
-                    
+
 
                 });
+
+                // Initialize form validation on the registration form.
+                // It has the name attribute "registration"
+                
+                $('form[id="registerationForm"]').validate({
+                    // Specify validation rules
+                    rules:{
+                        // The key name on the left side is the name attribute
+                        // of an input field. Validation rules are defined
+                        // on the right side
+                        fullName:"required",
+                        surname:"required",
+                        relation:"required",
+                        motherName:"required",
+                        motherMaidenName:"required",
+                        country:"required",
+                        region:"required",
+                        city:"required",
+                        address1:"required",
+                        email:{
+                            required: true,
+                            // Specify that email should be validated
+                            // by the built-in "email" rule
+                            email: true
+                        },
+                        password:{
+                            minlength: 8
+                        },
+                        cpassword:{
+                            minlength: 8,
+                            equalTo: "#password"
+                        },
+                        aadharNumber:{
+                            required: true,
+                            minlength: 12
+                        },
+                        mobileNumber:{
+                            required: true,
+                            minlength: 10,
+                            maxlength: 10,
+                            number: true
+                        },
+                        postal_code:{
+                            required: true,
+                            minlength: 6,
+                            number: true
+                        }
+                    },
+                    messages:{
+                        email: "Enter a valid email address",
+                        password: {
+                            required: "Enter your password",
+                            minlength: "Your password must contain more than 8 characters"
+                        },
+                        cpassword:  {
+                            required: "Enter confirm password",
+                            minlength: "Your password must contain more than 8 characters",
+                            passwordMatch: "Your Passwords Must Match" // custom message for mismatched passwords
+                        },
+                        fullName: "Enter your full name",
+                        surname: "Enter your surname",
+                        relation: "Enter your relation",
+                        motherName: "Enter your mother's name",
+                        motherMaidenName: "Enter your mothers maiden name",
+                        aadharNumber: "Enter valid aadhar number",
+                        mobileNumber: "Enter valid mobile number",
+                        country: "Enter your country",
+                        region: "Enter your state/ region",
+                        city: "Enter your city/ village name",
+                        address1: "Enter valid address",
+                        postal_code: "Enter valid pincode"
+                    },
+                    // Make sure the form is submitted to the destination defined
+                    // in the "action" attribute of the form when valid
+                    submitHandler: function (form) {
+                        form.submit();
+                    }
+                });
+
+
             });
         </script>
     </head>
@@ -206,15 +288,26 @@ include_once("controllers/functions.php");
         <section id="intro">
             <div class="container" style="position:relative">
                 <div class="row">
-                    <form method="post" id="registerationForm" action="./controllers/registerController.php" class="bs-docs-example form-inline" enctype="multipart/form-data">
+                    <form method="post" id="registerationForm" name="registerationForm" action="./controllers/registerController.php" class="bs-docs-example form-inline" enctype="multipart/form-data">
                         <legend>Registration Form:</legend>
                         <div class="form-horizontal">
-
+                            <?php 
+                                $status = null;
+                                $msg = null;
+                                if (isset($_SESSION['status1'])) {
+                                    $status = $_SESSION['status1'];
+                                    $msg = $_SESSION['message'];
+                                    ?>
+                                    <h3 class="text-error">Submit Failed. Reason: <?php echo $msg?></h3>
+                                <?php
+                                }
+                            ?>
+                            
                             <div class="control-group">
                                 <label class="control-label">Email ID <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
                                     <div class="input-append">
-                                        <input type="email" id="emailID" name="emailID" placeholder="Enter Your Email ID" class="input-xlarge" required >
+                                        <input type="email" id="emailID" name="emailID" placeholder="Enter Your Email ID" class="input-xlarge"  required>
                                         <span class="add-on">@</span>
                                     </div>
                                     <span class="help-block">Use your email ID as login ID in application.</span>
@@ -224,14 +317,14 @@ include_once("controllers/functions.php");
                             <div class="control-group">
                                 <label class="control-label">Password <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
-                                    <input type="password" id="password" name="password" placeholder="Enter Password.." class="input-xlarge"  required>
+                                    <input type="password" id="password" name="password" autocomplete=​"new-password" placeholder="Enter Password.." class="input-xlarge"  required>
                                     <span class="help-block">Password should be a minimum of 8 characters, with minimum of one number or special character.</span>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Confirm Password <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
-                                    <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password.." class="input-xlarge"  required> 
+                                    <input type="password" id="cpassword" name="cpassword" autocomplete=​"new-password" placeholder="Confirm Password.." class="input-xlarge"  required> 
                                 </div>
                             </div>
 
@@ -280,7 +373,7 @@ include_once("controllers/functions.php");
                             <div class="control-group">
                                 <label class="control-label">Mother Maiden Name</label> 
                                 <div class="controls">
-                                    <input type="text" id="motherMaidenName" name="motherMaidenName" placeholder="Enter Mother Maiden Name" class="input-xlarge">
+                                    <input type="text" id="motherMaidenName" name="motherMaidenName" placeholder="Enter Mother Maiden Name" class="input-xlarge" required>
                                 </div>
                             </div>
 
@@ -288,14 +381,14 @@ include_once("controllers/functions.php");
                                 <label class="control-label">Upload Photo</label> 
                                 <div class="controls">
                                     <input type="hidden" id="filename" name="filename" value="">
-                                    <input type="file" id="uploadphoto" name="uploadphoto" class="form-control form-control-sm" required>
+                                    <input type="file" id="uploadphoto" name="uploadphoto" class="form-control form-control-sm" >
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label">Aadhar Number <span class="asteriskField">*</span> </label> 
                                 <div class="controls">
-                                    <input type="number" id="aadharNumber" name="aadharNumber" placeholder="Enter 12 digit Aadhar Number" class="input-xlarge" required >
+                                    <input type="number" id="aadharNumber" name="aadharNumber" placeholder="Enter 12 digit Aadhar Number" class="input-xlarge"  required>
                                 </div>
                             </div>
 
@@ -315,7 +408,7 @@ include_once("controllers/functions.php");
                                     <div class='input-group'>
                                         <div class="input-group-addon">
                                             <div class="input-append">
-                                                <input type="date" id="dateOfBirth" name="dateOfBirth" class="input-xlarge" placeholder="DD/MM/YYY"  required />
+                                                <input type="date" id="dateOfBirth" name="dateOfBirth" class="input-xlarge" placeholder="DD/MM/YYY"   />
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
                                         </div>
@@ -414,7 +507,7 @@ include_once("controllers/functions.php");
                                 <div class="control-group">
                                     <label class="control-label">Country <span class="asteriskField">*</span> </label>
                                     <div class="controls">
-                                        <select id="country" name="country" class="input-xlarge">
+                                        <select id="country" name="country" class="input-xlarge" required>
                                             <option value="" selected="selected">(Please select a Country)</option>
 
                                             <?php
@@ -437,7 +530,7 @@ include_once("controllers/functions.php");
                                 <div class="control-group">
                                     <label class="control-label">State/Region<span class="asteriskField">*</span> </label>
                                     <div class="controls" id="region_div" name="region_div" >
-                                        <input id="region" name="region" type="text" placeholder="State/Region" class="input-xlarge">
+                                        <input id="region" name="region" type="text" placeholder="State/Region" class="input-xlarge" required>
                                         <p class="help-block"></p>
                                     </div>
                                 </div>
@@ -478,7 +571,7 @@ include_once("controllers/functions.php");
                                 <div class="control-group">
                                     <label class="control-label">City/ Village <span class="asteriskField">*</span> </label>
                                     <div class="controls">
-                                        <input id="city" name="city" type="text" placeholder="City/ Village Name" class="input-xlarge">
+                                        <input id="city" name="city" type="text" placeholder="City/ Village Name" class="input-xlarge" required>
                                         <p class="help-block"></p>
                                     </div>
                                 </div>                                  
@@ -486,7 +579,7 @@ include_once("controllers/functions.php");
                                 <div class="control-group">
                                     <label class="control-label">Address Line 1 <span class="asteriskField">*</span> </label> 
                                     <div class="controls">
-                                        <input type="text" class="input-xlarge" id="address1" name="address1" placeholder="Enter Your Address" />
+                                        <input type="text" class="input-xlarge" id="address1" name="address1" placeholder="Enter Your Address" required/>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -502,7 +595,7 @@ include_once("controllers/functions.php");
                                     <label class="control-label">Zip / Postal Code <span class="asteriskField">*</span> </label>
                                     <div class="controls">
                                         <input id="postal_code" name="postal_code" type="text" placeholder="Zip or Postal Code"
-                                               class="input-xlarge">
+                                               class="input-xlarge" required>
                                         <p class="help-block"></p>
                                     </div>
                                 </div>        
@@ -559,8 +652,6 @@ include_once("controllers/functions.php");
         <?php include 'footer.php'; ?> 
 
         <!-- JavaScript Library Files -->
-        <script src="assets/js/jquery-1.12.0.min.js" type="text/javascript"></script>
-        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
         <script src="assets/js/jquery.easing.js"></script>
         <script src="assets/js/google-code-prettify/prettify.js"></script>
         <script src="assets/js/modernizr.js"></script>
@@ -581,17 +672,17 @@ include_once("controllers/functions.php");
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 
         <script>
-        $(document).ready(function () {
-            var date_input = $('input[name="dateOfBirth"]'); //our date input has the name "date"
-            var container = $('.container form').length > 0 ? $('.container form').parent() : "body";
-            var options = {
-                format: 'dd/mm/yyyy',
-                container: container,
-                todayHighlight: true,
-                autoclose: true
-            };
-            date_input.datepicker(options);
-        });
+            $(document).ready(function () {
+                var date_input = $('input[name="dateOfBirth"]'); //our date input has the name "date"
+                var container = $('.container form').length > 0 ? $('.container form').parent() : "body";
+                var options = {
+                    format: 'dd/mm/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true
+                };
+                date_input.datepicker(options);
+            });
         </script>
     </body>
 </html>
