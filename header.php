@@ -66,8 +66,9 @@ if (isset($_SESSION['status'])) {
                                         </ul>
                                     </li>
                                     <li class="dropdown">
-                                        <a href="index.php">Members</a>
+                                        <a>Members</a>
                                         <ul class="dropdown-menu">
+                                            <li><a href="search-members.php">Search Members</a></li>
                                             <li><a href="founder-members.php">Founder Members</a></li>
                                             <li><a href="jac-coordinators.php">JAC Coordinators</a></li>
                                         </ul>
