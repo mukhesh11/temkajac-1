@@ -65,9 +65,9 @@ if (isset($_SESSION['status'])) {
                                             <li><a href="famous-personalities.php">Famous Personalities</a></li>
                                         </ul>
                                     </li>
-                                    <!-- li>
+                                    <li>
                                         <a href="search-members.php">Member List</a>
-                                    </li -->
+                                    </li>
                                     <li>
                                         <a href="founder-members.php">Founder Members</a>
                                     </li>
