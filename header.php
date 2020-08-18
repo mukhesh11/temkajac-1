@@ -65,7 +65,20 @@ if (isset($_SESSION['status'])) {
                                             <li><a href="famous-personalities.php">Famous Personalities</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown">
+                                    <!-- li>
+                                        <a href="search-members.php">Member List</a>
+                                    </li -->
+                                    <li>
+                                        <a href="founder-members.php">Founder Members</a>
+                                    </li>
+                                    <li>
+                                        <a href="jac-coordinators.php">JAC Coordinators</a>
+                                    </li>
+
+                                    <!-- li>
+                                        <a href="life-members.php">Life Members</a>
+                                    </li-->
+                                    <!-- li class="dropdown">
                                         <a>Members</a>
                                         <ul class="dropdown-menu">
                                             <li><a href="search-members.php">Search Members</a></li>
@@ -84,7 +97,7 @@ if (isset($_SESSION['status'])) {
                                     </li>
                                     <li>
                                         <a href="index.php">Gallery</a>
-                                    </li>
+                                    </li -->
                                     <li>
                                         <a href="contact.php">Contact</a>
                                     </li>

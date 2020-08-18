@@ -22,7 +22,7 @@ try {
     header('Content-Type: application/json; charset=UTF-8');
     echo json_encode($e);
 } finally {
-    
+    $con->close();
 }
     
     

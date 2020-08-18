@@ -32,11 +32,17 @@ class Users {
     var $address;
     
     var $country;
+    var $countryDesc;
     var $region;
+    var $regionDesc;
     var $district;
+    var $districtDesc;
     var $loksabha_consty;
+    var $loksabha_constyDesc;
     var $assembly_consty;
+    var $assembly_constyDesc;
     var $mandal;
+    var $mandalDesc;
     var $city;
     var $address1;
     var $address2;
@@ -334,5 +340,53 @@ public function get_all_users() {
     function setSysAdmin($sysAdmin) {
         $this->sysAdmin = $sysAdmin;
     }
+    function getCountryDesc() {
+        return $this->countryDesc;
+    }
+
+    function getRegionDesc() {
+        return $this->regionDesc;
+    }
+
+    function getDistrictDesc() {
+        return $this->districtDesc;
+    }
+
+    function getLoksabha_constyDesc() {
+        return $this->loksabha_constyDesc;
+    }
+
+    function getAssembly_constyDesc() {
+        return $this->assembly_constyDesc;
+    }
+
+    function getMandalDesc() {
+        return $this->mandalDesc;
+    }
+
+    function setCountryDesc($countryDesc) {
+        $this->countryDesc = $countryDesc;
+    }
+
+    function setRegionDesc($regionDesc) {
+        $this->regionDesc = $regionDesc;
+    }
+
+    function setDistrictDesc($districtDesc) {
+        $this->districtDesc = $districtDesc;
+    }
+
+    function setLoksabha_constyDesc($loksabha_constyDesc) {
+        $this->loksabha_constyDesc = $loksabha_constyDesc;
+    }
+
+    function setAssembly_constyDesc($assembly_constyDesc) {
+        $this->assembly_constyDesc = $assembly_constyDesc;
+    }
+
+    function setMandalDesc($mandalDesc) {
+        $this->mandalDesc = $mandalDesc;
+    }
+
 
 }

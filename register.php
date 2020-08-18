@@ -13,6 +13,10 @@ include_once("controllers/functions.php");
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
+                
+                /**
+                 * Country Ajax Dropdown Start 
+                 */
                 $("#country").change(function () {
                     var codeVal = $(this).val();
                     var typeid = 'STATE';
@@ -50,6 +54,10 @@ include_once("controllers/functions.php");
                         }
                     });
                 });
+                /**
+                 * Country Ajax Dropdown Stop 
+                 */
+
                 $('#region_div').on('change', '#region', function () {
                     var codeVal = $(this).val();
                     var typeid = 'DISTRICTS';
@@ -522,6 +530,7 @@ include_once("controllers/functions.php");
                                                 // Option
                                                 echo "<option value='" . $id . "' >" . $name . "</option>";
                                             }
+                                           // $con->close();
                                             ?>
                                         </select>
                                     </div>

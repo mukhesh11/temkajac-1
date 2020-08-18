@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Projects/temkajac/controllers/registerController.php</file>
-            <file>file:/C:/Projects/temkajac/assets/css/sequence.css</file>
             <file>file:/C:/Projects/temkajac/header.php</file>
-            <file>file:/C:/Projects/temkajac/register.php</file>
-            <file>file:/C:/Projects/temkajac/index.php</file>
-            <file>file:/C:/Projects/temkajac/exceptions/ApplicationException.php</file>
+            <file>file:/C:/Projects/temkajac/jac-coordinators.php</file>
+            <file>file:/C:/Projects/temkajac/founder-members.php</file>
         </group>
     </open-files>
 </project-private>
