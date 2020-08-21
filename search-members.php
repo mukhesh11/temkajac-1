@@ -7,6 +7,14 @@
         session_start();
         include("header.php");
         include_once("controllers/functions.php");
+        
+        $user = null;
+
+        if (isset($_SESSION['status'])) {
+            $user = unserialize($_SESSION['usersearch']);
+            $status = $_SESSION['status'];
+        }
+        
         ?> 
 
 
@@ -45,7 +53,9 @@
                             <div class="row-fluid">
                                 <div class="thumbnail">
                                     <!--  ===============MAIN Search Table ==============================-->
-                                    <form >
+                                    <form method="post" id="searchMemberForm" name="searchMemberForm" action="./controllers/MemberSearchController.php" 
+                                            class="bs-docs-example form-inline" enctype="multipart/form-data">
+                                        
                                         <table class="container centered" >
                                             <tr>
                                                 <td><label class="control-label alignright" >Name</label></td>
@@ -91,7 +101,7 @@
                                                 </td>
                                                 <td><label class="control-label alignright" >State</label></td>
                                                 <td> <div class="controls" id="region_div" name="region_div" >
-                                                        <input id="region" name="region" type="text" placeholder="State/Region" class="input-xlarge" required>
+                                                        <input id="region" name="region" type="text" placeholder="State/Region" class="input-xlarge" >
                                                     </div></td>
                                             </tr>
                                             <tr>
@@ -117,7 +127,7 @@
                                             <tr>
                                                 <td><label class="control-label alignright" >City/ Village</label></td>
                                                 <td> <div class="controls">
-                                                        <input id="city" name="city" type="text" placeholder="City/ Village Name" class="input-xlarge" required>
+                                                        <input id="city" name="city" type="text" placeholder="City/ Village Name" class="input-xlarge" >
                                                     </div></td>
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
@@ -163,9 +173,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        
                                         <tr>
                                             <td>1</td>
-                                            <td>Mark</td>
+                                            <td><?php $user->name; ?></td>
                                             <td>Otto</td>
                                             <td>@mdo</td>
                                             <td> </td>
