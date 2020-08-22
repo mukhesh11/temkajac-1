@@ -390,6 +390,7 @@ include_once("controllers/functions.php");
                                 <div class="controls">
                                     <input type="hidden" id="filename" name="filename" value="">
                                     <input type="file" id="uploadphoto" name="uploadphoto" class="form-control form-control-sm" >
+                                    <span class="help-block">Photo size more than 1 MB is not allowed. Kindly limit the size of file being uploaded.</span>
                                 </div>
                             </div>
 
