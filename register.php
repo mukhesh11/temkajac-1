@@ -444,6 +444,7 @@ include_once("controllers/functions.php");
                                     <div class="controls">
                                         <select id="profession_category" name="profession_category" class="input-xlarge">
                                             <option> </option>
+                                            <option>Advocate</option>
                                             <option>Arts &amp; crafts</option>
                                             <option>Agriculture, Food &amp Natural Resources</option>
                                             <option>Architecture &amp; Construction</option>
@@ -453,6 +454,7 @@ include_once("controllers/functions.php");
                                             <option>Books and magazines</option>
                                             <option>Clothing, accessories, and shoes</option>
                                             <option>Computers, accessories, and services</option>
+                                            <option>Doctor</option>
                                             <option>Education & Training</option>
                                             <option>Electronics</option>
                                             <option>Entertainment and media</option>
@@ -469,12 +471,14 @@ include_once("controllers/functions.php");
                                             <option>Law, Public Safety &amp; Security</option>
                                             <option>Manufacturing</option>
                                             <option>Marketing &amp; Sales</option>
+                                            <option>Print &amp; Electronic Media</option>
                                             <option>Nonprofit</option>
                                             <option>Packaging</option>
                                             <option>Pets and animals</option>
                                             <option>Politician</option>
                                             <option>Printing</option>
                                             <option>Retail  (not elsewhere classified)</option>
+                                            <option>RMP&amp;PMP</option>
                                             <option>Professional Services - other</option>
                                             <option>Science, Technology, Engineering &amp; Mathematics </option>                                              
                                             <option>Sports and outdoors</option>
