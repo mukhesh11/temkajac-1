@@ -189,7 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 function insertUserData($con, Users $user, $file_name) {
-    //$returnvalue = null;
+    $returnvalue = "failure";
 
     print_r("222. Print User Details :" . $user->getEmail());
 
@@ -217,6 +217,8 @@ function insertUserData($con, Users $user, $file_name) {
         //echo $query;
         if (!mysqli_query($con, $query)) {
             print_r(mysqli_error_list($con));
+            $array = mysqli_error_list($con);
+            throw new ApplicationException($array[0]["error"].": Code:".$array[0]["errno"]);
         }
         $returnvalue = "success";
     } catch (Exception $e) {
