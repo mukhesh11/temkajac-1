@@ -3,22 +3,24 @@
     <html lang="en">
 
         <!--  ------------------------Header Section ---------------------------- -->   
+
+
+
+        <body data-spy="scroll" data-target=".bs-docs-sidebar">
         <?php
         session_start();
         include("header.php");
         include_once("controllers/functions.php");
         
-        $user = null;
-
+        echo "Entered :";
+        $user_array = null;
         if (isset($_SESSION['status'])) {
-            $user = unserialize($_SESSION['usersearch']);
+            $user_array = unserialize($_SESSION['usersearch']);
             $status = $_SESSION['status'];
+            
+            echo "Session Data Successful:". $user_array;
         }
-        
         ?> 
-
-
-        <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
             <!-- Subhead
           ================================================== -->
@@ -53,6 +55,7 @@
                             <div class="row-fluid">
                                 <div class="thumbnail">
                                     <!--  ===============MAIN Search Table ==============================-->
+                                    
                                     <form method="post" id="searchMemberForm" name="searchMemberForm" action="./controllers/MemberSearchController.php" 
                                             class="bs-docs-example form-inline" enctype="multipart/form-data">
                                         
@@ -157,7 +160,6 @@
                                 <table id="searchTable" class="table" style="width:100%"> 
                                     <thead>
                                         <tr>
-                                            <th>#</th>
                                             <th>First Name</th>
                                             <th>Surname</th>
                                             <th>Father Name</th>
@@ -173,52 +175,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+                                <?php
+                                if ($user_array != null) {
+                                for ($i = 0; $i < count($user_array); $i++) {
+                                    $userdata =  $user_array[$i];
+                                ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td><?php $user->name; ?></td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
+                                        <td><?php  echo $userdata->name ?></td>
+                                        <td><?php  echo $userdata->getSurname() ?></td>
+                                        <td><?php  echo $userdata->getRelation() ?></td>
+                                        <td><?php echo  $userdata->getMother_name() ?></td>
+                                        <td><?php  echo $userdata->getMob_no() ?> </td>
+                                        <td><?php  echo $userdata->getEmail() ?> </td>
+                                        <td><?php  echo $userdata->getMandalDesc() ?> </td>
+                                        <td><?php  echo $userdata->getAssembly_constyDesc() ?> </td>
+                                        <td><?php  echo $userdata->getLoksabha_constyDesc() ?> </td>
+                                        <td><?php  echo $userdata->getDistrictDesc() ?> </td>
+                                        <td><?php  echo $userdata->getRegionDesc() ?> </td>
+                                        <td><?php  echo $userdata->getCountryDesc() ?> </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                        </tr>
+
+                           <?php  }
+                            } ?>
+
                                     </tbody>
                                 </table>
 

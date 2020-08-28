@@ -97,41 +97,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_num_rows($result) > 0) {
           // output data of each row
           while($row = $result->fetch_assoc()) {
-            echo "NAME: " . $row["NAME"]. " - SurName: " . $row["SURNAME"]. " " . $row["RELATION"]. "<br>";
+            //echo "NAME: " . $row["NAME"]. " - SurName: " . $row["SURNAME"]. " " . $row["RELATION"]. "<br>";
             
             $uResult = new Users();
-            $uResult->setName($row['NAME']);
-            $uResult->setSurname($row['SURNAME']);
-            //$uResult->setRelation();
-            //$uResult->setMother_name();
-            $uResult->setMob_no($row['MOB_NO']);
-            
-            
-            
+           $uResult->setName($row['NAME']);
+                $uResult->setSurname($row['SURNAME']);
+                $uResult->setRelation($row['RELATION']);
+                $uResult->setMother_name($row['MOTHER_NAME']);
+                $uResult->setMob_no($row['MOB_NO']);
+                $uResult->setEMAIL($row['EMAIL']);
+                $uResult->setMandalDesc($row['MANDAL_DESC']); // if un-commented this part not getting output.
+                $uResult->setAssembly_constyDesc($row['ASSEMBLY_DESC']);
+                $uResult->setLoksabha_constyDesc($row['LOK_DESC']);
+                $uResult->setDistrictDesc($row['DISTRICT_CODE']);
+                $uResult->setRegionDesc($row['REGION_DESC']);
+                $uResult->setCountryDesc($row['COUNTRY_DESC']);
+
+                array_push($user_array, $uResult);
           }
+          
+          
         } else {
           echo "0 results";
         }
 
-        
-         if ($msg === "success") {
-                $_SESSION['usersearch'] = serialize($uResult);
-                $_SESSION['status'] = "success";
+            $_SESSION['usersearch'] = serialize($user_array);
+            $_SESSION['status'] = "success";
                 
-                exit;
-            } else {
-                $msg = '0';
-            }
             header("Location:../search-members.php");
-            
+            exit;
         ////header('Content-Type: application/json; charset=UTF-8');
         // encoding array to json format
-        //echo "Result :". json_encode($user_array);
+        echo "Result :". json_encode($user_array);
     } catch(Exception $e) {
         //header('Content-Type: application/json; charset=UTF-8');
-        echo json_encode($e);
+        echo json_encode("Exception in Controller :". $e);
     } finally {
          $con->close();
     }
-
 }
