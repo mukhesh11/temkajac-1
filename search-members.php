@@ -181,7 +181,7 @@
                                     $userdata =  $user_array[$i];
                                 ?>
                                         <tr>
-                                        <td><?php  echo $userdata->name ?></td>
+                                        <td><?php  echo $userdata->getName() ?></td>
                                         <td><?php  echo $userdata->getSurname() ?></td>
                                         <td><?php  echo $userdata->getRelation() ?></td>
                                         <td><?php echo  $userdata->getMother_name() ?></td>
