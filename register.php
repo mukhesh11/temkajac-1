@@ -6,7 +6,7 @@ include("header.php");
 include_once("controllers/functions.php");
 
 ?> 
-
+<!-- comments -->
 <html lang="en">
     <head>
         <script src="assets/js/jquery-1.12.0.min.js" type="text/javascript"></script>
